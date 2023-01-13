@@ -84,7 +84,7 @@ export default function TransactionViewer() {
         provider.getBlockNumber().catch(() => { });
 
         const tryFetchTrace = () => {
-            doApiRequest<TraceResponse>(`/api/v1/trace/${chain}/${txhash}`)
+            doApiRequest<TraceResponse>(`/api/v1/trace/${chain}/${txhash}`, { mode: 'cors'})
                 .then((traceResponse) => {
                     console.log('loaded trace', traceResponse);
 

@@ -80,10 +80,10 @@ export const fetchDefiLlamaPrices = (
 
                 filteredIds.forEach((id) => (newState.status[id] = 'pending'));
                 Promise.all([
-                    fetch(`https://coins.llama.fi/prices/current/${filteredIds.join(',')}`)
+                    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/web3/tk_price?token=OKT&filtered_ids=${filteredIds.join(',')}`, { mode: 'cors'})
                         .then((resp) => resp.json())
                         .then((resp) => resp.coins),
-                    fetch(`https://coins.llama.fi/prices/historical/${when}/${filteredIds.join(',')}`)
+                    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/web3/tk_price?ts=${when}&token=OKT&filtered_ids=${filteredIds.join(',')}`, { mode: 'cors'})
                         .then((resp) => resp.json())
                         .then((resp) => resp.coins),
                 ])

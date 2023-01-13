@@ -14,6 +14,18 @@ export type ChainConfig = {
 
 export const SupportedChains = [
     {
+        chainId: 66,
+        id: 'okc',
+        displayName: 'OKC',
+        nativeTokenAddress: '0x6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+        nativeSymbol: 'OKT',
+        coingeckoId: 'coingecko:okc',
+        defillamaPrefix: 'okt',
+        rpcUrl: 'https://exchainrpc.okex.org',
+        blockexplorerUrl: 'https://www.oklink.com/zh-cn/okc',
+    },
+    /*
+    {
         chainId: 1,
         id: 'ethereum',
         displayName: 'Ethereum',
@@ -89,7 +101,7 @@ export const SupportedChains = [
         defillamaPrefix: 'fantom',
         rpcUrl: 'https://rpcapi.fantom.network',
         blockexplorerUrl: 'https://ftmscan.com',
-    },
+    },*/
 ];
 
 const conduitAPIs: { [key: string]: string } = {

@@ -9,7 +9,7 @@ export type SearchMetadata = {
 
 export const defaultSearchMetadata = () => {
     return {
-        chain: 'ethereum',
+        chain: 'okc', // ethereum 实际没用上
         txhash: '',
     };
 };

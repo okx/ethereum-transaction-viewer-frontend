@@ -36,7 +36,7 @@ function Navbar(props: NavbarProps) {
     const { chain: queryChain, txhash: queryTxhash } = router.query;
 
     // sets the default chain to ethereum.
-    const [chain, setChain] = React.useState('ethereum');
+    const [chain, setChain] = React.useState('okc');
     const [txhash, setTxhash] = React.useState('');
 
     React.useEffect(() => {
@@ -56,15 +56,15 @@ function Navbar(props: NavbarProps) {
     return (
         <div>
             <Head>
-                <title>Ethereum Transaction Viewer</title>
-                <meta name="description" content="View and trace Ethereum transactions" />
+                <title>OKC Transaction Viewer</title>
+                <meta name="description" content="View and trace OKC transactions" />
                 <meta property="og:type" content="website" />
-                <meta property="og:title" content="Ethereum Transaction Viewer" />
-                <meta property="og:description" content="View and trace Ethereum transactions" />
+                <meta property="og:title" content="OKC Transaction Viewer" />
+                <meta property="og:description" content="View and trace OKC transactions" />
                 <meta property="og:image" content="https://tx.eth.samczsun.com/favicon.png" />
                 <meta property="twitter:card" content="summary" />
-                <meta property="twitter:title" content="Ethereum Transaction Viewer" />
-                <meta property="twitter:description" content="View and trace Ethereum transactions" />
+                <meta property="twitter:title" content="OKC Transaction Viewer" />
+                <meta property="twitter:description" content="View and trace OKC transactions" />
                 <meta property="twitter:url" content="https://tx.eth.samczsun.com" />
                 <meta property="twitter:image" content="https://tx.eth.samczsun.com/favicon.png" />
                 <meta property="twitter:site" content="@samczsun" />
@@ -81,11 +81,11 @@ function Navbar(props: NavbarProps) {
                         </Link>
                     </Grid2>
                     <Grid2 sx={{ display: { xs: 'none', md: 'initial' } }}>
-                        <Typography fontFamily="NBInter">Ethereum Transaction Viewer</Typography>
+                        <Typography fontFamily="NBInter">OKC Transaction Viewer</Typography>
                     </Grid2>
                     <Grid2 xs></Grid2>
                     <Grid2>
-                        <a href="https://github.com/samczsun/ethereum-transaction-viewer-frontend" target={'_blank'} rel={'noreferrer noopener'}>
+                        <a href="https://github.com/okx/ethereum-transaction-viewer-frontend" target={'_blank'} rel={'noreferrer noopener'}>
                             <GitHub />
                         </a>
                     </Grid2>
@@ -138,10 +138,22 @@ function Navbar(props: NavbarProps) {
                             placeholder="Enter txhash..."
                             fullWidth
                             margin="dense"
-                            onChange={(event) => setTxhash(event.target.value)}
+                            onChange={(event) => {
+                                let localTxhash = event.target.value
+                                localTxhash = localTxhash.trim();
+                                // If the user does not enter 0x, automatically add 0x prefix
+                                if (localTxhash.indexOf("0x") != 0 && localTxhash.length == 64) {
+                                    localTxhash = '0x' + localTxhash;
+                                }
+                                setTxhash(localTxhash)
+                            }}
                             value={txhash}
                             onKeyUp={(event) => {
                                 if (event.key === 'Enter') {
+                                    if (txhash.length != 66) {
+                                        alert("We can't recognise your txId, please check your txId format");
+                                        return false;
+                                    }
                                     doSearch();
                                 }
                             }}
